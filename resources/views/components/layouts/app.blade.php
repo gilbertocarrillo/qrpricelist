@@ -12,7 +12,9 @@
 </head>
 
 <body>
-    {{ $slot }}
+    <div class="bg-light">
+        {{ $slot }}
+    </div>
 </body>
 
 </html>
