@@ -3,7 +3,7 @@
 <ul class="nav nav-pills flex-column mb-auto">
     <li class="nav-item">
         <a href="#"
-            class="nav-link d-flex align-items-center {{ request()->routeIs('home') ? 'active' : '' }} {{ request()->routeIs('pricelists.*') ? 'active' : '' }}"
+            class="nav-link d-flex align-items-center {{ request()->routeIs('home') ? 'active' : '' }}"
             aria-current="page">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house me-2"
                 viewBox="0 0 16 16">

@@ -1,4 +1,4 @@
-<svg version="1.0" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" {{ $attributes }}>
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 100 100" xml:space="preserve" {{ $attributes }}>
     <path fill="#6f42c1"
         d="M30 23.333V10H10v6.666h13.333v13.333h20v-6.666zM70 63.331V49.999H50v6.666h13.333v13.332h13.334v-6.666z" />
     <path fill="#6610f2"
