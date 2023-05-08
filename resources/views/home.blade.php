@@ -1,6 +1,12 @@
 <x-layouts.app title="Home">
-    <x-layouts.nav />
-    <div class="vh-100" style="padding-top: 56px;">
-            {{Auth::user()}}
+    <div class="vh-100">
+        {{ Auth::user() }}
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <a href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+                                this.closest('form').submit();">
+                Logout
+            </a>
     </div>
 </x-layouts.app>
