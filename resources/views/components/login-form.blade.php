@@ -15,15 +15,20 @@
         <x-ui.input-error :messages="$errors->get('password')" class="mt-2" />
     </div>
 
-    <div class="mb-4">
+    <!--Check-->
+    <div class="mb-4 d-flex justify-content-between">
         <div class="form-check">
             <label for="remember" class="form-check-label">Remember me</label>
             <input type="checkbox" id="remember" name="remember" class="form-check-input">
         </div>
+
+        @if (Route::has('password.request'))
+            <a href="#" class="text-decoration-none">Forgot password?</a>
+        @endif
     </div>
 
     <!--Button-->
-    <div class="d-grid">
+    <div class="d-grid mb-4">
         <x-ui.button class="btn-primary">Sing in</x-ui.button>
     </div>
 </form>

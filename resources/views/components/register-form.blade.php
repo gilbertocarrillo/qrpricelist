@@ -23,7 +23,7 @@
     </div>
 
     <!--Button-->
-    <div class="d-grid">
+    <div class="d-grid mb-4">
         <x-ui.button class="btn-primary">Register</x-ui.button>
     </div>
 </form>

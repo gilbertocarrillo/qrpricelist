@@ -5,5 +5,9 @@
             Welcome
         </div>
         <x-login-form />
+        <div class="text-secondary text-center">
+            Don't have an account?
+            <a href="{{ route('register') }}" class="text-decoration-none">Sign up</a>
+        </div>
     </div>
 </x-layouts.app>
