@@ -4,8 +4,8 @@
     <!--Email-->
     <div class="mb-4">
         <x-ui.input-label for="email" value="Email" />
-        <x-ui.input type="email" id="email" name="email" :value="old('name')" required autofocus />
-        <x-ui.input-error :messages="$errors->get('name')" class="mt-2" />
+        <x-ui.input type="email" id="email" name="email" :value="old('email')" required autofocus />
+        <x-ui.input-error :messages="$errors->get('email')" class="mt-2" />
     </div>
 
     <!--Password-->

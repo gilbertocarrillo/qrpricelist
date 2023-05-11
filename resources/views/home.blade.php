@@ -6,7 +6,7 @@
                     Price list not found
                 </div>
 
-                <a href="{{ route('home') }}" class="btn btn-primary">
+                <a href="{{ route('pricelists.create') }}" class="btn btn-primary">
                     Create a Price list
                 </a>
             </div>
@@ -14,6 +14,10 @@
             <div class="display-4">
                 Home
             </div>
+            <div class="d-flex justify-content-center">
+                <img height="200px" width="200px" src="{{ Storage::url(Auth::user()->pricelist->qrcode) }}" alt="">
+            </div>
+
         @endif
     </x-layouts.dashboard>
 </x-layouts.app>

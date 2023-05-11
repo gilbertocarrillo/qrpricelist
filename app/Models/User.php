@@ -32,4 +32,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function pricelist()
+    {
+        return $this->hasOne(Pricelist::class);
+    }
 }

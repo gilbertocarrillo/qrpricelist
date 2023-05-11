@@ -2,7 +2,7 @@
     <ul class="nav nav-pills d-flex align-items-center justify-content-evenly w-100">
 
         <li class="nav-item">
-            <a href="" class="nav-link px-2 active rounded-0 {{ request()->routeIs('home') ? 'active' : '' }}">
+            <a href="{{ route('home') }}" class="nav-link px-2 rounded-0 {{ request()->routeIs('home') ? 'active' : '' }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-house"
                     viewBox="0 0 16 16">
                     <path
@@ -12,7 +12,7 @@
         </li>
 
         <li class="nav-item">
-            <a href="" class="nav-link px-2 rounded-0 {{ request()->routeIs('pricelists.*') ? 'active' : '' }}">
+            <a href="{{ Auth::user()->pricelist ? route('pricelists.show', Auth::user()->pricelist->id) : route('pricelists.create')}}" class="nav-link px-2 rounded-0 {{ request()->routeIs('pricelists.*') ? 'active' : '' }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
                     class="bi bi-card-list" viewBox="0 0 16 16">
                     <path
