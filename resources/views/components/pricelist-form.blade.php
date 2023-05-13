@@ -6,7 +6,7 @@
     @if ($pricelist)
         @method('PUT')
     @endif
-    <div class="container-fluid">
+
         <div class="h3 lead text-secondary">Business Info</div>
         <div class="row">
             <div class="mb-4 col-12 col-md-6">
@@ -24,30 +24,10 @@
                         {{ old('currency', $pricelist->currency ?? null) == 'USD' ? 'selected' : '' }}>US Dollar
                     </option>
                     <option value="EUR"
-                        {{ old('currency', $pricelist->currency ?? null) == 'EUR' ? 'selected' : '' }}>Euro</option>
+                        {{ old('currency', $pricelist->currency ?? null) == 'EUR' ? 'selected' : '' }}>Euro
+                    </option>
                     <option value="JPY"
                         {{ old('currency', $pricelist->currency ?? null) == 'JPY' ? 'selected' : '' }}>Japanese Yen
-                    </option>
-                    <option value="GBP"
-                        {{ old('currency', $pricelist->currency ?? null) == 'GBP' ? 'selected' : '' }}>British Pound
-                        Sterling</option>
-                    <option value="AUD"
-                        {{ old('currency', $pricelist->currency ?? null) == 'AUD' ? 'selected' : '' }}>Australian Dollar
-                    </option>
-                    <option value="CAD"
-                        {{ old('currency', $pricelist->currency ?? null) == 'CAD' ? 'selected' : '' }}>Canadian Dollar
-                    </option>
-                    <option value="CHF"
-                        {{ old('currency', $pricelist->currency ?? null) == 'CHF' ? 'selected' : '' }}>Swiss Franc
-                    </option>
-                    <option value="CNY"
-                        {{ old('currency', $pricelist->currency ?? null) == 'CNY' ? 'selected' : '' }}>Chinese Yuan
-                    </option>
-                    <option value="NZD"
-                        {{ old('currency', $pricelist->currency ?? null) == 'NZD' ? 'selected' : '' }}>New Zealand
-                        Dollar</option>
-                    <option value="HKD"
-                        {{ old('currency', $pricelist->currency ?? null) == 'HKD' ? 'selected' : '' }}>Hong Kong Dollar
                     </option>
                 </select>
                 <x-ui.input-error :messages="$errors->get('currency')" class="mt-2" />
@@ -79,8 +59,6 @@
                 <x-ui.input type="text" id="whatsapp" name="whatsapp" :value="old('whatsapp', $pricelist->whatsapp ?? null)" />
                 <x-ui.input-error :messages="$errors->get('whatsapp')" class="mt-2" />
             </div>
-
-
 
             <div class="mb-4 col-12 col-md-6">
                 <x-ui.input-label for="logo" value="Logo" />
@@ -115,9 +93,8 @@
             </div>
         </div>
 
-        <!--Button-->
         <div class="d-grid mb-4">
-            <x-ui.button class="btn-primary">{{ $pricelist ? 'Update' : 'Register' }}</x-ui.button>
+            <x-ui.button class="btn-primary">{{ $pricelist ? 'Update' : 'Create' }}</x-ui.button>
         </div>
-    </div>
+
 </form>

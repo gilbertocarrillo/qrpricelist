@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('twitter')->nullable();
 
             $table->uuid('user_id')->unique();
-            $table->foreign('user_id')->references('id')->on('users')->delete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->OnDelete('cascade');
 
             $table->timestamps();
         });
