@@ -29,7 +29,7 @@
     </li>
     <li>
         <a href="{{ Auth::user()->pricelist ? route('pricelists.categories.index', Auth::user()->pricelist->id) : route('home') }}"
-            class="nav-link d-flex align-items-center {{ request()->routeIs('pricelists.categories.*') ? 'active' : '' }}">
+            class="nav-link d-flex align-items-center {{ request()->routeIs('pricelists.categories.*') && !str_contains(request()->url(), 'products') ? 'active' : '' }}">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                 class="bi bi-diagram-3 me-2" viewBox="0 0 16 16">
                 <path fill-rule="evenodd"
@@ -39,8 +39,8 @@
         </a>
     </li>
     <li>
-        <a href="#"
-            class="nav-link d-flex align-items-center {{ request()->routeIs('products.*') ? 'active' : '' }}">
+        <a href="{{ Auth::user()->pricelist && Auth::user()->pricelist->categories ? route('pricelists.products.index', Auth::user()->pricelist->id) : route('home') }}"
+            class="nav-link d-flex align-items-center {{ request()->routeIs('pricelists.products.*') ? 'active' : '' }}">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                 class="bi bi-box-seam me-2" viewBox="0 0 16 16">
                 <path

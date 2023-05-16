@@ -4,6 +4,8 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PricelistController;
+use App\Http\Controllers\ProductController;
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,4 +35,6 @@ Route::middleware('auth')->group(function () {
     Route::resource('pricelists', PricelistController::class)->except(['index']);
 
     Route::resource('pricelists.categories', CategoryController::class)->shallow()->except(['show']);
+
+    Route::resource('pricelists.products', ProductController::class)->shallow()->except(['show']);
 });
