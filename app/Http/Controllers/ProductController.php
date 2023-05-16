@@ -6,14 +6,17 @@ use App\Models\Pricelist;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Yajra\DataTables\DataTables;
 
 class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Pricelist $pricelist)
+    public function index(Request $request, Pricelist $pricelist)
     {
+        $modalId = 'deleteProductModal';
+
         $categories = $pricelist->categories()
             ->with('subcategories.products')
             ->whereNull('parent_id')
@@ -27,7 +30,32 @@ class ProductController extends Controller
             }
         }
 
-        return view('products.index', compact('products'));
+        if ($request->ajax()) {
+            return DataTables::of($products)
+                ->editColumn('photo', function (Product $product) {
+                    return '<img src="' . Storage::url($product->photo) . '" width="100" height="100" />';
+                },)
+                ->editColumn('category_id', function (Product $product) {
+                    return $product->category->name;
+                })
+                ->addColumn('action', function (Product $product) use ($modalId) {
+
+                    return '
+                    <a class="btn btn-outline-primary btn-sm me-2" href="' . route('products.edit', $product->id) . '">
+                    Edit
+                    </a>
+                    <a class="btn btn-outline-danger btn-sm" href="" data-bs-toggle="modal"
+                    data-bs-target="#' . $modalId . '" data-bs-title="Delete product"
+                    data-bs-content="Are you sure you want to delete this product?"
+                    data-bs-url="' . route('products.destroy', $product->id) . '">
+                    Delete
+                    </a>
+                    ';
+                })
+                ->rawColumns(['photo', 'action'])
+                ->toJson();
+        }
+        return view('products.index', compact('products', 'modalId'));
     }
 
     /**

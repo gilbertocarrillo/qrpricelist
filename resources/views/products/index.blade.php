@@ -1,6 +1,5 @@
 @php
     $deleteUrl = route('products.destroy', ':id');
-    $modalId = 'deleteProductModal';
 @endphp
 <x-layouts.app title="Products">
     <x-layouts.dashboard>
@@ -44,7 +43,7 @@
                         </thead>
                         <tbody>
 
-                            @foreach ($products as $product)
+                            {{-- @foreach ($products as $product)
                                 <tr>
                                     <td>
                                         <img src="{{ Storage::url($product->photo) }}" height="100px" width="100px"
@@ -67,7 +66,8 @@
                                         </a>
                                     </td>
                                 </tr>
-                            @endforeach
+                            @endforeach --}}
+
                     </table>
                 </div>
             </div>
@@ -79,9 +79,45 @@
     $(document).ready(function() {
         $('#example').DataTable({
             info: false,
+            processing: true,
+            serverSide: true,
             responsive: true,
+            ajax: "{{ route('pricelists.products.index', Auth::user()->pricelist->id) }}",
+            dataType: 'json',
+            order:[[ 0, '' ]],
+            columns: [
+                {
+                    data: 'photo',
+                    name: 'photo',
+                    orderable: false,
+                },
+                {
+                    data: 'name',
+                    name: 'name'
+                },
+                {
+                    data: 'description',
+                    name: 'description'
+                },
+                {
+                    data: 'category_id',
+                    name: 'category'
+                },
+                {
+                    data: 'price',
+                    name: 'price'
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    searchable: false,
+                    orderable: false,
+                },
+
+
+            ],
             "lengthChange": false,
-            "pageLength": 3,
+            "pageLength": 10,
             "columnDefs": [{
                 "width": "120px",
                 "targets": 0
