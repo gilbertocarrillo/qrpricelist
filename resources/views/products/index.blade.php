@@ -30,7 +30,7 @@
             </a>
             <div class="card w-100">
                 <div class="card-body">
-                    <table id="example" class="table table-striped responsive nowrap" style="width:100%">
+                    <table id="products-table" class="table table-striped responsive nowrap" style="width:100%">
                         <thead>
                             <tr>
                                 <th>Photo</th>
@@ -42,32 +42,6 @@
                             </tr>
                         </thead>
                         <tbody>
-
-                            {{-- @foreach ($products as $product)
-                                <tr>
-                                    <td>
-                                        <img src="{{ Storage::url($product->photo) }}" height="100px" width="100px"
-                                            alt="">
-                                    </td>
-                                    <td>{{ $product->name }}</td>
-                                    <td>{{ $product->description }}</td>
-                                    <td>{{ $product->category->name }}</td>
-                                    <td>{{ $product->price }}</td>
-                                    <td>
-                                        <a class="btn btn-outline-primary btn-sm me-2"
-                                            href="{{ route('products.edit', $product->id) }}">
-                                            Edit
-                                        </a>
-                                        <a class="btn btn-outline-danger btn-sm" href="" data-bs-toggle="modal"
-                                            data-bs-target="#{{ $modalId }}" data-bs-title="Delete product"
-                                            data-bs-content="Are you sure you want to delete this product?"
-                                            data-bs-url="{{ route('products.destroy', $product->id) }}">
-                                            Delete
-                                        </a>
-                                    </td>
-                                </tr>
-                            @endforeach --}}
-
                     </table>
                 </div>
             </div>
@@ -77,7 +51,7 @@
 </x-layouts.app>
 <script>
     $(document).ready(function() {
-        $('#example').DataTable({
+        $('#products-table').DataTable({
             info: false,
             processing: true,
             serverSide: true,
