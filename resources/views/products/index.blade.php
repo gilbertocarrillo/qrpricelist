@@ -30,7 +30,8 @@
             </a>
             <div class="card w-100">
                 <div class="card-body">
-                    <table id="products-table" class="table table-striped responsive nowrap" style="width:100%">
+                    <table id="products-table" class="table table-striped table table-striped responsive align-middle"
+                        style="width: 100%">
                         <thead>
                             <tr>
                                 <th>Photo</th>
@@ -52,15 +53,17 @@
 <script>
     $(document).ready(function() {
         $('#products-table').DataTable({
+            responsive: true,
             info: false,
             processing: true,
             serverSide: true,
-            responsive: true,
+
             ajax: "{{ route('pricelists.products.index', Auth::user()->pricelist->id) }}",
             dataType: 'json',
-            order:[[ 0, '' ]],
-            columns: [
-                {
+            order: [
+                [0, '']
+            ],
+            columns: [{
                     data: 'photo',
                     name: 'photo',
                     orderable: false,
@@ -93,9 +96,14 @@
             "lengthChange": false,
             "pageLength": 10,
             "columnDefs": [{
-                "width": "120px",
-                "targets": 0
-            }],
+                    "width": "120px",
+                    "targets": [0,1,3,4]
+                },
+                {
+                    "width": "100px",
+                    "targets": [5]
+                },
+            ],
         });
     });
 </script>

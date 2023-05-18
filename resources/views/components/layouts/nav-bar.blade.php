@@ -37,7 +37,7 @@
         </li>
 
         <li class="nav-item">
-            <a href="" class="nav-link px-2 rounded-0 {{ request()->routeIs('products.*') ? 'active' : '' }}">
+            <a href="{{ Auth::user()->pricelist && Auth::user()->pricelist->categories ? route('pricelists.products.index', Auth::user()->pricelist->id) : route('home') }}" class="nav-link px-2 rounded-0 {{ request()->routeIs('pricelists.products.*') ? 'active' : '' }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
                     class="bi bi-box-seam" viewBox="0 0 16 16">
                     <path
