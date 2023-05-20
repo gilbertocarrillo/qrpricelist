@@ -4,7 +4,7 @@
         <div class="lead mb-4 text-center" style="width: 350px">
             Sign up and start to share your pricelist with everyone
         </div>
-        <x-register-form />
+        <x-register-reset-password-form />
         <div class="text-secondary text-center">
             Do you have an account?
             <a href="{{ route('login') }}"class="text-decoration-none">Sign in</a>
