@@ -50,7 +50,7 @@
         </a>
     </li>
     <li>
-        <a href="#"
+        <a href="{{ route('profile.edit') }}"
             class="nav-link d-flex align-items-center {{ request()->routeIs('profile.*') ? 'active' : '' }}">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                 class="bi bi-person-circle me-2" viewBox="0 0 16 16">

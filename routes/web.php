@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\PasswordController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\RegisteredUserController;
@@ -44,4 +46,10 @@ Route::middleware('auth')->group(function () {
     Route::resource('pricelists.categories', CategoryController::class)->shallow()->except(['show']);
 
     Route::resource('pricelists.products', ProductController::class)->shallow()->except(['show']);
+
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::put('/password', [PasswordController::class, 'update'])->name('password.update');
 });
