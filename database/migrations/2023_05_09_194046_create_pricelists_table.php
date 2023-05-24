@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('currency');
             $table->string('url')->default('');
             $table->string('qrcode')->default('');
+            $table->integer('scans')->default(0);
             $table->string('description')->nullable();
             $table->string('logo')->nullable();
             $table->string('cover')->nullable();

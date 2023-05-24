@@ -24,7 +24,7 @@ class PricelistController extends Controller
      */
     public function create()
     {
-        if(Auth::user()->pricelist){
+        if (Auth::user()->pricelist) {
             return to_route('home');
         }
         return view('pricelists.create');
@@ -73,7 +73,7 @@ class PricelistController extends Controller
         $pricelist->url = $url;
 
         // Create qr code and storage
-        $qrcode = QrCode::gradient(127, 0, 255, 225, 0, 255, 'diagonal')->size(500)->format('png')->generate("$url?source=qr");
+        $qrcode = QrCode::gradient(127, 0, 255, 225, 0, 255, 'diagonal')->size(512)->format('png')->generate("$url?source=qr");
         $path = "{$pricelist->id}/qrcode.png";
         Storage::put($path, $qrcode);
         $pricelist->qrcode = $path;
@@ -165,5 +165,19 @@ class PricelistController extends Controller
         $pricelist->delete();
 
         return to_route('home');
+    }
+
+    public function display(Request $request, Pricelist $pricelist)
+    {
+        // Check si has parameter source
+        if ($request->has('source')) {
+            // Check si source es q
+            if ($request->source == 'qr') {
+                // increment pricelists scans
+                $pricelist->increment('scans');
+            }
+        }
+
+        return view('pricelists.display', compact('pricelist'));
     }
 }
