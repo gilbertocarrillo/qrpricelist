@@ -27,7 +27,7 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
-        return to_route('profile.edit')->with('status', 'profile-updated');
+        return to_route('profile.edit')->with('status', 'Profile updated');
     }
 
     public function destroy(Request $request)
@@ -51,6 +51,6 @@ class ProfileController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return to_route('login')->with('status', 'account-deleted');
+        return to_route('login')->with('status', 'Account deleted');
     }
 }
