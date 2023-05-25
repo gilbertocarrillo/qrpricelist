@@ -17,6 +17,7 @@
         {{ $slot }}
     </div>
     <script src="{{ asset('DataTables/datatables.min.js') }}"></script>
+    @yield('scripts')
 </body>
 
 </html>
