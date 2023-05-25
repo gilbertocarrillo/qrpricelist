@@ -10,6 +10,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PricelistController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\RemoveQrQueryParameter;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +23,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/pricelists/view/{pricelist}', [PricelistController::class, 'display'])->name('pricelist.view');
+Route::get('/pricelists/view/{pricelist}', [PricelistController::class, 'display'])
+    ->name('pricelist.view')
+    ->middleware(RemoveQrQueryParameter::class);
 
 Route::middleware('guest')->group(function () {
     Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
