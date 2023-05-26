@@ -15,6 +15,8 @@ class ProductController extends Controller
      */
     public function index(Request $request, Pricelist $pricelist)
     {
+        $this->authorize('viewAny', [Product::class, $pricelist]);
+
         $modalId = 'deleteProductModal';
 
         $categories = $pricelist->categories()
@@ -70,8 +72,10 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Pricelist $pricelist)
     {
+        $this->authorize('create', [Product::class, $pricelist]);
+
         return view('products.create');
     }
 
@@ -80,6 +84,8 @@ class ProductController extends Controller
      */
     public function store(Request $request, Pricelist $pricelist)
     {
+        $this->authorize('create', [Product::class, $pricelist]);
+
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string', 'max:255'],
@@ -111,6 +117,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
+        $this->authorize('update', [Product::class, $product]);
+
         return view('products.edit', compact('product'));
     }
 
@@ -119,6 +127,8 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
+        $this->authorize('update', [Product::class, $product]);
+
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string', 'max:255'],
@@ -147,6 +157,8 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+        $this->authorize('delete', [Product::class, $product]);
+
         if ($product->photo) {
             Storage::delete($product->photo);
         }
