@@ -99,7 +99,7 @@ class PricelistController extends Controller
      */
     public function edit(Pricelist $pricelist)
     {
-        $this->authorize('view', $pricelist);
+        $this->authorize('update', $pricelist);
         return view('pricelists.edit', compact('pricelist'));
     }
 

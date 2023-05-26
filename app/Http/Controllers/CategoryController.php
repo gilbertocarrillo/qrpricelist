@@ -5,9 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Pricelist;
 use App\Models\Category;
 use Illuminate\Validation\ValidationException;
-use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
-use libphonenumber\Leniency\Valid;
+
 
 class CategoryController extends Controller
 {
@@ -16,6 +15,7 @@ class CategoryController extends Controller
      */
     public function index(Pricelist $pricelist)
     {
+        $this->authorize('viewAny', [Category::class, $pricelist]);
         return view('category.index', compact('pricelist'));
     }
 
@@ -24,6 +24,7 @@ class CategoryController extends Controller
      */
     public function create(Pricelist $pricelist)
     {
+        $this->authorize('create', [Category::class, $pricelist]);
         return view('category.create', compact('pricelist'));
     }
 
@@ -32,6 +33,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request, Pricelist $pricelist)
     {
+        $this->authorize('create', [Category::class, $pricelist]);
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string', 'max:255'],
@@ -66,6 +68,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
+        $this->authorize('update', $category);
         return view('category.edit', compact('category'));
     }
 
@@ -74,6 +77,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
+        $this->authorize('update', $category);
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string', 'max:255'],
@@ -113,6 +117,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
+        $this->authorize('delete', $category);
         $pricelist_id = $category->pricelist_id;
         // Delete category
         $category->delete();
