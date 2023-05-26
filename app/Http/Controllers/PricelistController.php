@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pricelist;
-use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
@@ -90,6 +89,8 @@ class PricelistController extends Controller
      */
     public function show(Pricelist $pricelist)
     {
+        $this->authorize('view', $pricelist);
+
         return view('pricelists.show', compact('pricelist'));
     }
 
@@ -98,6 +99,7 @@ class PricelistController extends Controller
      */
     public function edit(Pricelist $pricelist)
     {
+        $this->authorize('view', $pricelist);
         return view('pricelists.edit', compact('pricelist'));
     }
 
@@ -106,6 +108,8 @@ class PricelistController extends Controller
      */
     public function update(Request $request, Pricelist $pricelist)
     {
+        $this->authorize('update', $pricelist);
+
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'currency' => ['required', 'string', 'max:255'],
@@ -150,6 +154,8 @@ class PricelistController extends Controller
      */
     public function destroy(Pricelist $pricelist)
     {
+        $this->authorize('delete', $pricelist);
+
         // Delete logo and cover if exist
         if ($pricelist->logo) {
             Storage::delete($pricelist->logo);
