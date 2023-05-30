@@ -2,10 +2,12 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\Auth\RegisteredUserController;
-use App\Http\Controllers\Api\Auth\AuthenticatedSessionController;
 use App\Http\Middleware\Authenticate;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Api\Auth\RegisteredUserController;
+use App\Http\Controllers\Api\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Api\PricelistController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +26,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy']);
+    Route::apiResource('pricelists', PricelistController::class)->except(['index']);
 });
 
 Route::post('/register', [RegisteredUserController::class, 'store']);

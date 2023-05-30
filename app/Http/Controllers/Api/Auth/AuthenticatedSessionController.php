@@ -33,6 +33,6 @@ class AuthenticatedSessionController extends Controller
     public function destroy(Request $request)
     {
         $request->user()->currentAccessToken()->delete();
-        return response()->json([], 204);
+        return response()->noContent();
     }
 }
