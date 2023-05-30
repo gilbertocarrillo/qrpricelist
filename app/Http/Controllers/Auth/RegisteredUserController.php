@@ -5,10 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules\Password;
 use App\Providers\RouteServiceProvider;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreUserRequest;
 
 class RegisteredUserController extends Controller
 {
@@ -17,13 +16,10 @@ class RegisteredUserController extends Controller
         return view('auth.register');
     }
 
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
         // Validate data
-        $validated = $request->validate([
-            'email' => ['required', 'email', 'string', 'max:255', 'unique:users'],
-            'password' => ['required', 'confirmed', Password::min(8)->letters()->numbers()->symbols()],
-        ]);
+        $validated = $request->validated();
 
         // Create new user
         $user = User::create([
