@@ -27,12 +27,20 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::post('/logout', [AuthenticatedSessionController::class, 'destroy']);
-    Route::apiResource('pricelists', PricelistController::class)->except(['index']);
-    Route::apiResource('pricelists.categories', CategoryController::class)->shallow();
-    Route::apiResource('pricelists.products', ProductController::class)->shallow();
+    Route::apiResource('pricelists', PricelistController::class)->except(['index', 'show']);
+    Route::apiResource('pricelists.categories', CategoryController::class)->shallow()->except(['index',  'show']);
+    Route::apiResource('pricelists.products', ProductController::class)->shallow()->except(['index',  'show']);
 
+    Route::post('/logout', [AuthenticatedSessionController::class, 'destroy']);
 });
+
+Route::get('pricelists/{pricelist}', [PricelistController::class, 'show']);
+
+Route::get('pricelists/{pricelist}/categories', [CategoryController::class, 'index']);
+Route::get('categories/{category}', [CategoryController::class, 'show']);
+
+Route::get('pricelists/{pricelist}/products', [ProductController::class, 'index']);
+Route::get('products/{product}', [ProductController::class, 'show']);
 
 Route::post('/register', [RegisteredUserController::class, 'store']);
 Route::post('/login', [AuthenticatedSessionController::class, 'store']);
