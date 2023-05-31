@@ -22,7 +22,7 @@ class CategoryPolicy
      */
     public function view(User $user, Category $category): bool
     {
-        //
+        return $user->id === $category->pricelist->user_id;
     }
 
     /**
@@ -38,7 +38,7 @@ class CategoryPolicy
      */
     public function update(User $user, Category $category): bool
     {
-        return $user->id === $category->pricelist->user_id;
+        return $user->pricelist->id === $category->pricelist_id;
     }
 
     /**
