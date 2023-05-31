@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\Auth\RegisteredUserController;
 use App\Http\Controllers\Api\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Api\PricelistController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\ProductController;
 
 
 /*
@@ -29,6 +30,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy']);
     Route::apiResource('pricelists', PricelistController::class)->except(['index']);
     Route::apiResource('pricelists.categories', CategoryController::class)->shallow();
+    Route::apiResource('pricelists.products', ProductController::class)->shallow();
+
 });
 
 Route::post('/register', [RegisteredUserController::class, 'store']);

@@ -38,7 +38,11 @@ class ProductPolicy
      */
     public function update(User $user, Product $product): bool
     {
-        return $user->id === $product->category->pricelist->user_id;
+        return $user->pricelist->categories()
+            ->whereHas('products', function ($query) use ($product) {
+                $query->where('id', $product->id);
+            })
+            ->exists();
     }
 
     /**
@@ -46,7 +50,11 @@ class ProductPolicy
      */
     public function delete(User $user, Product $product): bool
     {
-        return $user->id === $product->category->pricelist->user_id;
+        return $user->pricelist->categories()
+            ->whereHas('products', function ($query) use ($product) {
+                $query->where('id', $product->id);
+            })
+            ->exists();
     }
 
     /**
