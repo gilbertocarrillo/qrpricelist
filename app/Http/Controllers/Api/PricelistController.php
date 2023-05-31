@@ -73,7 +73,6 @@ class PricelistController extends Controller
      */
     public function show(Pricelist $pricelist)
     {
-        $this->authorize('view', $pricelist);
         return response()->json([
             'data' => new PricelistResource($pricelist),
         ], 200);

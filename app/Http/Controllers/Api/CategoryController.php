@@ -18,8 +18,6 @@ class CategoryController extends Controller
      */
     public function index(Pricelist $pricelist)
     {
-        $this->authorize('viewAny', [Category::class, $pricelist]);
-
         $query = Category::where('pricelist_id', $pricelist->id);
         $categories = QueryBuilder::for($query)
             ->allowedIncludes(['pricelist', 'parent', 'subcategories', 'products'])
@@ -61,8 +59,6 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        $this->authorize('view', [Category::class, $category]);
-
         $category = QueryBuilder::for(Category::where('id', $category->id))
             ->allowedIncludes(['pricelist', 'parent', 'subcategories', 'products'])
             ->first();
