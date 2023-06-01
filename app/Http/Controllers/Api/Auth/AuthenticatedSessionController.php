@@ -17,7 +17,7 @@ class AuthenticatedSessionController extends Controller
 
         if (!auth()->attempt($credentials)) {
             return response()->json([
-                'message' => 'Unauthorized',
+                'message' => 'The provided credentials are incorrect',
             ], 401);
         }
 

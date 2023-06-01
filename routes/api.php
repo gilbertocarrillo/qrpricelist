@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\PricelistController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ProfileController;
+use App\Http\Controllers\Api\Auth\PasswordController;
 
 
 /*
@@ -31,6 +32,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('pricelists', PricelistController::class)->except(['index', 'show']);
     Route::apiResource('pricelists.categories', CategoryController::class)->shallow()->except(['index',  'show']);
     Route::apiResource('pricelists.products', ProductController::class)->shallow()->except(['index',  'show']);
+
+    Route::put('/password', [PasswordController::class, 'update']);
 
     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy']);
 });
