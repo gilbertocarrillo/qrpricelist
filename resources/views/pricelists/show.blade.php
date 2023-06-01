@@ -7,16 +7,18 @@
     <x-layouts.dashboard class="">
 
         <div class="w-100 mb-3 rounded d-none d-md-block"
-            style="height: 15rem; background-image: url({{ Storage::url($pricelist->cover) }}); background-size: cover; background-position: center center;  ">
+            style="height: 15rem; background-image: url({{ $pricelist->cover ? Storage::url($pricelist->cover) : Storage::url('default-cover.jpeg') }}); background-size: cover; background-position: center center;  ">
             <div class="w-100 h-100 d-flex justify-content-center align-items-center">
-                <img height="200px" width="200px" src="{{ Storage::url($pricelist->logo) }}" class="rounded-circle shadow"
-                    alt="...">
+                <img height="200px" width="200px"
+                    src="{{ $pricelist->logo ? Storage::url($pricelist->logo) : Storage::url('default.jpeg') }}"
+                    class="rounded-circle shadow" alt="...">
             </div>
         </div>
 
         <div class="w-100 m-3 d-flex d-md-none justify-content-center align-items-center" style="height: 15rem;"">
-            <img height="200px" width="200px" src="{{ Storage::url($pricelist->logo) }}" class="rounded-circle shadow"
-                alt="...">
+            <img height="200px" width="200px"
+                src="{{ $pricelist->logo ? Storage::url($pricelist->logo) : Storage::url('default.jpeg') }}"
+                class="rounded-circle shadow" alt="...">
         </div>
 
         <div class="d-flex justify-content-between align-items-center mb-1">

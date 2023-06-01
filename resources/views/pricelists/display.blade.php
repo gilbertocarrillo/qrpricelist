@@ -1,17 +1,18 @@
 <x-layouts.app title="Pricelist view">
     <div class="p-3">
         <div class="w-100 mb-3 d-none d-md-block"
-            style="height: 20rem; background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url({{ Storage::url($pricelist->cover) }}); background-size: cover; background-position: center center;  ">
+            style="height: 20rem; background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url({{ $pricelist->cover ? Storage::url($pricelist->cover) : Storage::url('default-cover.jpeg') }}); background-size: cover; background-position: center center;  ">
             <div class="w-100 h-100 d-flex flex-column justify-content-center align-items-center">
-                <img height="200px" width="200px" src="{{ Storage::url($pricelist->logo) }}" class="rounded-circle shadow"
-                    alt="...">
+                <img height="200px" width="200px"
+                    src="{{ $pricelist->logo ? Storage::url($pricelist->logo) : Storage::url('default.jpeg') }}"
+                    class="rounded-circle shadow" alt="...">
                 <div class="fw-bold fs-2 text-white">{{ $pricelist->name }}</div>
             </div>
         </div>
 
         <div class="w-100 d-flex flex-column d-md-none justify-content-center align-items-center"
             style="height: 15rem;"">
-            <img height="200px" width="200px" src="{{ Storage::url($pricelist->logo) }}" class="rounded-circle shadow"
+            <img height="200px" width="200px" src="{{ $pricelist->logo ? Storage::url($pricelist->logo) : Storage::url('default.jpeg') }}" class="rounded-circle shadow"
                 alt="...">
             <div class="fw-bold fs-2 text-primary">{{ $pricelist->name }}</div>
         </div>

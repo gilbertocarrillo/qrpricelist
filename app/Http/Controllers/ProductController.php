@@ -35,7 +35,7 @@ class ProductController extends Controller
         if ($request->ajax()) {
             return DataTables::of($products)
                 ->editColumn('photo', function (Product $product) {
-                    return '<img src="' . Storage::url($product->photo) . '" width="100" height="100" />';
+                    return '<img src="' . ($product->photo ? Storage::url($product->photo) : Storage::url('default.jpeg')) . '" width="100" height="100" />';
                 },)
                 ->editColumn('category_id', function (Product $product) {
                     return $product->category->name;
