@@ -4,7 +4,7 @@
     <div class="row g-0">
         <div class="col-md-5 d-none d-md-block">
             <div class="" style="height: 15rem;">
-                <img src="{{ Storage::url($product->photo) }}" width="100%" height="100%" class=" rounded-start">
+                <img src="{{ $product->photo ? Storage::url($product->photo) : Storage::url('default.jpeg') }}" width="100%" height="100%" class=" rounded-start">
             </div>
         </div>
         <div class="col-md-7">
