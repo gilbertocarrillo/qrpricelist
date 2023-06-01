@@ -19,12 +19,24 @@ class ForgotPasswordController extends Controller
         //Create token
         $token = $this->createToken();
 
-        //Save token
-        DB::table('password_reset_tokens')->insert([
-            'email' => $request->email,
-            'token' => $token,
-            'created_at' => now(),
-        ]);
+        // Verify if not exist a old token
+
+        if (!DB::table('password_reset_tokens')->where('email', $request->email)->exists()) {
+            //Save token
+            DB::table('password_reset_tokens')->insert([
+                'email' => $request->email,
+                'token' => $token,
+                'created_at' => now(),
+            ]);
+        } else {
+            //update token
+            DB::table('password_reset_tokens')->where('email', $request->email)->update([
+                'token' => $token,
+                'created_at' => now(),
+            ]);
+        }
+
+
 
         // Send email
         Mail::to($request->email)->send(new PasswordResetMail($token));

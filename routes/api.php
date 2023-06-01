@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\Auth\PasswordController;
 use App\Http\Controllers\Api\Auth\ForgotPasswordController;
+use App\Http\Controllers\Api\Auth\ResetPasswordController;
 
 
 /*
@@ -50,4 +51,7 @@ Route::get('products/{product}', [ProductController::class, 'show']);
 Route::post('/register', [RegisteredUserController::class, 'store']);
 Route::post('/login', [AuthenticatedSessionController::class, 'store']);
 
-Route::post('/forgot-password', [ForgotPasswordController::class, 'store']);
+Route::post('/forgot-password', [ForgotPasswordController::class, 'store'])
+->middleware('throttle:3,60');
+
+Route::post('/reset-password', [ResetPasswordController::class, 'store']);
