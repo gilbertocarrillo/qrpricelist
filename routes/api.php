@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Api\PricelistController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\ProfileController;
 
 
 /*
@@ -22,11 +23,11 @@ use App\Http\Controllers\Api\ProductController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'show']);
+    Route::put('/profile', [ProfileController::class, 'update']);
+    Route::delete('/profile', [ProfileController::class, 'destroy']);
+
     Route::apiResource('pricelists', PricelistController::class)->except(['index', 'show']);
     Route::apiResource('pricelists.categories', CategoryController::class)->shallow()->except(['index',  'show']);
     Route::apiResource('pricelists.products', ProductController::class)->shallow()->except(['index',  'show']);
