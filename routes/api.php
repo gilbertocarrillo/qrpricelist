@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\Auth\PasswordController;
+use App\Http\Controllers\Api\Auth\ForgotPasswordController;
 
 
 /*
@@ -48,3 +49,5 @@ Route::get('products/{product}', [ProductController::class, 'show']);
 
 Route::post('/register', [RegisteredUserController::class, 'store']);
 Route::post('/login', [AuthenticatedSessionController::class, 'store']);
+
+Route::post('/forgot-password', [ForgotPasswordController::class, 'store']);
